@@ -16,40 +16,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eqp-t1-qXI">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eqp-t1-qXI">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Record Button">
+                                <state key="normal" image="Mic">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v9H-QD-N7a"/>
+                                </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtR-aE-wZS">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="Eqp-t1-qXI" secondAttribute="centerY" id="6Ri-4l-OmG"/>
                             <constraint firstAttribute="centerX" secondItem="Eqp-t1-qXI" secondAttribute="centerX" id="HRd-4l-qXV"/>
+                            <constraint firstAttribute="centerX" secondItem="LtR-aE-wZS" secondAttribute="centerX" id="eQG-Ng-dWh"/>
+                            <constraint firstItem="Eqp-t1-qXI" firstAttribute="top" secondItem="LtR-aE-wZS" secondAttribute="bottom" constant="14" id="iFS-3y-Bzm"/>
+                            <constraint firstAttribute="centerY" secondItem="LtR-aE-wZS" secondAttribute="centerY" constant="50.5" id="vdq-dz-ix6"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Eqp-t1-qXI"/>
+                                <exclude reference="LtR-aE-wZS"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="eQG-Ng-dWh"/>
+                                <exclude reference="vdq-dz-ix6"/>
                                 <exclude reference="6Ri-4l-OmG"/>
                                 <exclude reference="HRd-4l-qXV"/>
+                                <exclude reference="iFS-3y-Bzm"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="Eqp-t1-qXI"/>
+                                <include reference="LtR-aE-wZS"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="eQG-Ng-dWh"/>
+                                <exclude reference="vdq-dz-ix6"/>
                                 <include reference="6Ri-4l-OmG"/>
                                 <include reference="HRd-4l-qXV"/>
+                                <include reference="iFS-3y-Bzm"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="recordingInProgress" destination="LtR-aE-wZS" id="Xcr-h6-qOW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="Mic" width="64" height="64"/>
+    </resources>
 </document>
