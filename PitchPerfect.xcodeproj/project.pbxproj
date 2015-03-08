@@ -14,6 +14,7 @@
 		818435121AA59B9E00472FE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 818435111AA59B9E00472FE2 /* Images.xcassets */; };
 		818435151AA59B9E00472FE2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818435131AA59B9E00472FE2 /* LaunchScreen.xib */; };
 		818435211AA59B9F00472FE2 /* PitchPerfectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818435201AA59B9F00472FE2 /* PitchPerfectTests.swift */; };
+		81FA38321AAC601A002FB713 /* sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81FA38311AAC601A002FB713 /* sound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		8184351A1AA59B9F00472FE2 /* PitchPerfectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PitchPerfectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8184351F1AA59B9F00472FE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		818435201AA59B9F00472FE2 /* PitchPerfectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchPerfectTests.swift; sourceTree = "<group>"; };
+		81FA38311AAC601A002FB713 /* sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		818435081AA59B9E00472FE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				81FA38311AAC601A002FB713 /* sound.mp3 */,
 				818435091AA59B9E00472FE2 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -195,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FA38321AAC601A002FB713 /* sound.mp3 in Resources */,
 				818435101AA59B9E00472FE2 /* Main.storyboard in Resources */,
 				818435151AA59B9E00472FE2 /* LaunchScreen.xib in Resources */,
 				818435121AA59B9E00472FE2 /* Images.xcassets in Resources */,

@@ -7,13 +7,23 @@
 //
 
 import UIKit
+import AVFoundation
 
-class PlaySoundsViewController: UIViewController {
-
+class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
+    var audioPlayer: AVAudioPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // file path to audio clip
+        if let filePath = NSBundle.mainBundle().pathForResource("sound", ofType: ".mp3") {
+            println(filePath)
+            var filePathURL = NSURL(string: filePath)
+            // create an instance of AVAudioPlayer
+            audioPlayer = AVAudioPlayer(contentsOfURL: filePathURL!, error: nil)
+        } else {
+            println("The file does not exist")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +31,10 @@ class PlaySoundsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func playSoundSlow(sender: UIButton) {
+        // TODO: play audio clip
+        audioPlayer.play()
+    }
 
     /*
     // MARK: - Navigation

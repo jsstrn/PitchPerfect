@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QoV-xG-oxN">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Record-->
@@ -64,14 +65,14 @@
                             <mask key="constraints">
                                 <exclude reference="eQG-Ng-dWh"/>
                                 <exclude reference="vdq-dz-ix6"/>
+                                <exclude reference="EpD-Yh-VGM"/>
+                                <exclude reference="FjG-Qs-2FN"/>
                                 <exclude reference="6Ri-4l-OmG"/>
                                 <exclude reference="HRd-4l-qXV"/>
                                 <exclude reference="iFS-3y-Bzm"/>
                                 <exclude reference="Htg-Qm-FtR"/>
                                 <exclude reference="uf8-9n-HwL"/>
                                 <exclude reference="vgT-6Q-MVB"/>
-                                <exclude reference="EpD-Yh-VGM"/>
-                                <exclude reference="FjG-Qs-2FN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -83,14 +84,14 @@
                             <mask key="constraints">
                                 <include reference="eQG-Ng-dWh"/>
                                 <exclude reference="vdq-dz-ix6"/>
+                                <exclude reference="EpD-Yh-VGM"/>
+                                <include reference="FjG-Qs-2FN"/>
                                 <include reference="6Ri-4l-OmG"/>
                                 <include reference="HRd-4l-qXV"/>
                                 <include reference="iFS-3y-Bzm"/>
                                 <exclude reference="Htg-Qm-FtR"/>
                                 <include reference="uf8-9n-HwL"/>
                                 <exclude reference="vgT-6Q-MVB"/>
-                                <exclude reference="EpD-Yh-VGM"/>
-                                <include reference="FjG-Qs-2FN"/>
                             </mask>
                         </variation>
                     </view>
@@ -114,8 +115,46 @@
                         <viewControllerLayoutGuide type="bottom" id="LO8-le-7Ha"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DaC-Fb-Tya">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9F9-h2-NL8">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="Snail">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSoundSlow:" destination="8H5-RL-Pnd" eventType="touchUpInside" id="ElB-Qx-N1f"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.72941176470588232" green="0.81176470588235294" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="9F9-h2-NL8" firstAttribute="leading" secondItem="DaC-Fb-Tya" secondAttribute="leadingMargin" constant="53" id="27E-jV-qw5">
+                                <variation key="widthClass=compact" constant="30"/>
+                            </constraint>
+                            <constraint firstItem="9F9-h2-NL8" firstAttribute="top" secondItem="TQd-x5-3u5" secondAttribute="bottom" constant="60" id="HnB-LT-uLC">
+                                <variation key="widthClass=compact" constant="50"/>
+                            </constraint>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="9F9-h2-NL8"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="27E-jV-qw5"/>
+                                <exclude reference="HnB-LT-uLC"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="9F9-h2-NL8"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="27E-jV-qw5"/>
+                                <include reference="HnB-LT-uLC"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvZ-tI-HuP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -143,6 +182,7 @@
     </scenes>
     <resources>
         <image name="Mic" width="64" height="64"/>
+        <image name="Snail" width="100" height="100"/>
         <image name="Stop" width="64" height="64"/>
     </resources>
 </document>
