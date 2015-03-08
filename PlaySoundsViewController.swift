@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
+class PlaySoundsViewController: UIViewController {
     var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
@@ -17,10 +17,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
 
         // file path to audio clip
         if let filePath = NSBundle.mainBundle().pathForResource("sound", ofType: ".mp3") {
-            println(filePath)
+            // convert String to NSURL
             var filePathURL = NSURL(string: filePath)
+            
             // create an instance of AVAudioPlayer
             audioPlayer = AVAudioPlayer(contentsOfURL: filePathURL!, error: nil)
+            
+            // enable rate
+            audioPlayer.enableRate = true
         } else {
             println("The file does not exist")
         }
@@ -32,7 +36,13 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func playSoundSlow(sender: UIButton) {
-        // TODO: play audio clip
+        // stop audio clip
+        audioPlayer.stop()
+        
+        // change rate of audio clip
+        audioPlayer.rate = 0.5
+        
+        // play audio clip
         audioPlayer.play()
     }
 
