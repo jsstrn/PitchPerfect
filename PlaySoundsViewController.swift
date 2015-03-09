@@ -19,7 +19,7 @@ class PlaySoundsViewController: UIViewController {
         if let filePath = NSBundle.mainBundle().pathForResource("sound", ofType: ".mp3") {
             // convert String to NSURL
             var filePathURL = NSURL(string: filePath)
-            
+
             // create an instance of AVAudioPlayer
             audioPlayer = AVAudioPlayer(contentsOfURL: filePathURL!, error: nil)
             
@@ -46,6 +46,21 @@ class PlaySoundsViewController: UIViewController {
         audioPlayer.play()
     }
 
+    @IBAction func playSoundFast(sender: UIButton) {
+        // stop audio clip
+        audioPlayer.stop()
+        
+        // change rate of audio clip
+        audioPlayer.rate = 1.5
+        
+        // play audio clip
+        audioPlayer.play()
+        
+    }
+    @IBAction func stopAudioPlayer(sender: UIButton) {
+        // stop audio clip
+        audioPlayer.stop()
+    }
     /*
     // MARK: - Navigation
 

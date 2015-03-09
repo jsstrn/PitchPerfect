@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         recordButton.enabled = false
         
         // TODO: record user's voice
-        println("You clicked on the record button")
+
     }
     @IBAction func stopAudio(sender: UIButton) {
         // disable stop button
