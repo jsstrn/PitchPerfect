@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
+    
     var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
@@ -17,6 +18,7 @@ class PlaySoundsViewController: UIViewController {
 
         // file path to audio clip
         if let filePath = NSBundle.mainBundle().pathForResource("sound", ofType: ".mp3") {
+            
             // convert String to NSURL
             var filePathURL = NSURL(string: filePath)
 
@@ -35,32 +37,29 @@ class PlaySoundsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func playSound() {
+        
+        audioPlayer.stop() // stop audio clip
+        
+        audioPlayer.currentTime = 0.0 // reset play head
+        
+        audioPlayer.play() // play audio clip
+    }
+    
     @IBAction func playSoundSlow(sender: UIButton) {
-        // stop audio clip
-        audioPlayer.stop()
-        
-        // change rate of audio clip
-        audioPlayer.rate = 0.5
-        
-        // play audio clip
-        audioPlayer.play()
+        audioPlayer.rate = 0.5 // change rate of audio clip
+        playSound()
     }
 
     @IBAction func playSoundFast(sender: UIButton) {
-        // stop audio clip
-        audioPlayer.stop()
-        
-        // change rate of audio clip
-        audioPlayer.rate = 1.5
-        
-        // play audio clip
-        audioPlayer.play()
-        
+        audioPlayer.rate = 1.5 // change rate of audio clip
+        playSound()
     }
-    @IBAction func stopAudioPlayer(sender: UIButton) {
-        // stop audio clip
-        audioPlayer.stop()
+    
+    @IBAction func stopSound(sender: UIButton) {
+        audioPlayer.stop() // stop audio clip
     }
+
     /*
     // MARK: - Navigation
 
