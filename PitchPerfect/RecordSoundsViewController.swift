@@ -43,12 +43,6 @@ class RecordSoundsViewController: UIViewController {
         stopButton.hidden = false // show stop button
         recordButton.enabled = false // disable record button
         
-        // TODO: What are these frameworks? 
-        // TODO: NSSearchPathForDirectoriesInDomains
-        // TODO: NSURL.fileURLWithPathComponents
-        // TODO: AVAudioSession, setCategory
-        // TODO: meteringEnabled
-        
         // get the main app directory
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         
