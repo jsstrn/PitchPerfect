@@ -13,6 +13,7 @@ class PlaySoundsViewController: UIViewController {
     
     var audioPlayer: AVAudioPlayer!
     var audioEngine: AVAudioEngine!
+    var audioPlayerNode: AVAudioPlayerNode!
     var audioFile: AVAudioFile!
     var receiveRecordedAudio: RecordedAudio!
     
@@ -55,24 +56,31 @@ class PlaySoundsViewController: UIViewController {
 
     @IBAction func playSoundSlow(sender: UIButton) {
         audioPlayer.rate = 0.5 // change rate of audio clip
+        stopAndResetAudioEngine()
         playSound()
     }
 
     @IBAction func playSoundFast(sender: UIButton) {
         audioPlayer.rate = 1.5 // change rate of audio clip
+        stopAndResetAudioEngine()
         playSound()
+    }
+    
+    func stopAndResetAudioEngine() {
+        audioEngine.stop()
+        audioEngine.reset()
     }
     
     @IBAction func stopSound(sender: UIButton) {
         audioPlayer.stop() // stop audio clip
+        stopAndResetAudioEngine()
     }
     
     func playSoundsWithVariablePitch(pitch: Float) {
         audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        stopAndResetAudioEngine()
         
-        var audioPlayerNode = AVAudioPlayerNode()
+        audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
         
         var changePitchEffect = AVAudioUnitTimePitch()
