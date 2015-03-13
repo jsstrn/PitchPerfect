@@ -9,14 +9,16 @@
 import UIKit
 import AVFoundation
 
-class RecordSoundsViewController: UIViewController {
+class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     /* Properties */
     
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    
     var audioRecorder: AVAudioRecorder!
+    var recordedAudio: RecordedAudio!
     
     /* Methods */
     
@@ -50,24 +52,49 @@ class RecordSoundsViewController: UIViewController {
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
+    let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
         
         // the string for file path and the audio file, converted to NSURL
         let pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
         println(filePath)
         
-        var session = AVAudioSession.sharedInstance()
-        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+        // open an audio session and set its category
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
         
         audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
+        audioRecorder.delegate = self
         audioRecorder.meteringEnabled = true
         audioRecorder.record()
 
     }
+    
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
+        if flag {
+            // save recorded audio
+            recordedAudio = RecordedAudio()
+            recordedAudio.filePathURL = recorder.url
+            recordedAudio.title = recorder.url.lastPathComponent
+            // move to next scene (segue)
+            self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
+        } else {
+            println("Recording was not successful!")
+            recordButton.enabled = true // enable record button
+            recordingInProgress.hidden = true // hide recording label
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "stopRecording") {
+            
+        }
+    }
+    
     @IBAction func stopAudio(sender: UIButton) {
         audioRecorder.stop() // stop recording
+        AVAudioSession.sharedInstance().setActive(false, error: nil) // close the audio session
         stopButton.enabled = false // disable stop button
+        recordButton.enabled = true // enable record button
         recordingInProgress.hidden = true // hide recording label
     }
 
