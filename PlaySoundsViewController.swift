@@ -26,21 +26,6 @@ class PlaySoundsViewController: UIViewController {
         
         audioEngine = AVAudioEngine()
         audioFile = AVAudioFile(forReading: receiveRecordedAudio.filePathURL, error: nil)
-        
-//        // file path to audio clip
-//        if let filePath = NSBundle.mainBundle().pathForResource("sound", ofType: ".mp3") {
-//            
-//            // convert String to NSURL
-//            var filePathURL = NSURL(string: filePath)
-//            
-//            // create an instance of AVAudioPlayer
-//            audioPlayer = AVAudioPlayer(contentsOfURL: filePathURL!, error: nil)
-//            
-//            // enable rate
-//            audioPlayer.enableRate = true
-//        } else {
-//            println("The file does not exist")
-//        }
     }
 
     override func didReceiveMemoryWarning() {

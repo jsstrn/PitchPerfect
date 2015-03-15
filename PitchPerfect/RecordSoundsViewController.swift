@@ -40,7 +40,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
 
     @IBAction func recordAudio(sender: UIButton) {
-        
         recordingInProgress.hidden = false // show recording label
         stopButton.hidden = false // show stop button
         recordButton.enabled = false // disable record button
@@ -52,7 +51,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
-    let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
+        let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
         
         // the string for file path and the audio file, converted to NSURL
         let pathArray = [dirPath, recordingName]
@@ -100,5 +99,4 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         recordingInProgress.hidden = true // hide recording label
     }
 
-}
-
+} // end of RecordSoundsViewController
