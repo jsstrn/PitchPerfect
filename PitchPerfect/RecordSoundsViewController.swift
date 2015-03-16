@@ -13,6 +13,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     /* Properties */
     
+    @IBOutlet weak var tapToRecord: UILabel!
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -40,6 +41,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
 
     @IBAction func recordAudio(sender: UIButton) {
+        tapToRecord.hidden = true // hide instructions
         recordingInProgress.hidden = false // show recording label
         stopButton.hidden = false // show stop button
         recordButton.enabled = false // disable record button
@@ -65,15 +67,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.delegate = self
         audioRecorder.meteringEnabled = true
         audioRecorder.record()
-
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         if flag {
             // save recorded audio
-            recordedAudio = RecordedAudio()
-            recordedAudio.filePathURL = recorder.url
-            recordedAudio.title = recorder.url.lastPathComponent
+            recordedAudio = RecordedAudio(title: recorder.url.lastPathComponent! , filePathURL: recorder.url)
             // move to next scene (segue)
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         } else {
@@ -97,6 +96,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.enabled = false // disable stop button
         recordButton.enabled = true // enable record button
         recordingInProgress.hidden = true // hide recording label
+        tapToRecord.hidden = false // show instructions
     }
 
 } // end of RecordSoundsViewController
