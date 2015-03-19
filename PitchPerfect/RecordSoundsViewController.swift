@@ -15,10 +15,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
     var audioRecorder: AVAudioRecorder!
     var recordedAudio: RecordedAudio!
+    var isInTheMiddleOfRecording: Bool = false
     
     // Methods
     
@@ -35,6 +37,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewWillAppear(animated: Bool) {
         recordLabel.text = "Tap to record"
         recordButton.enabled = true // enable record button
+        pauseButton.hidden = true
+        pauseButton.enabled = true
         stopButton.hidden = true // show stop button
         stopButton.enabled = true // enable stop button
     }
@@ -42,28 +46,56 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func recordAudio(sender: UIButton) {
         recordLabel.text = "Recording"
         stopButton.hidden = false // show stop button
+        pauseButton.hidden = false
         recordButton.enabled = false // disable record button
         
-        // get the main app directory
-        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        
-        // create the audio file name with datetime stamp
-        let currentDateTime = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
-        
-        // the string for file path and the audio file, converted to NSURL
-        let pathArray = [dirPath, recordingName]
-        let filePath = NSURL.fileURLWithPathComponents(pathArray)
-        println(filePath)
-        
-        activateAudioSession() // start audio session for recording
-        
-        audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
-        audioRecorder.delegate = self
-        audioRecorder.meteringEnabled = true
-        audioRecorder.record()
+        if !isInTheMiddleOfRecording {
+            // create a new recording
+            
+            // get the main app directory
+            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            
+            // create the audio file name with datetime stamp
+            let currentDateTime = NSDate()
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "ddMMyyyy-HHmmss"
+            let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
+            
+            // the string for file path and the audio file, converted to NSURL
+            let pathArray = [dirPath, recordingName]
+            let filePath = NSURL.fileURLWithPathComponents(pathArray)
+            println(filePath)
+            
+            activateAudioSession() // start audio session for recording
+            
+            audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
+            audioRecorder.delegate = self
+            audioRecorder.meteringEnabled = true
+            audioRecorder.record()
+        } else {
+            // continue recording
+            audioRecorder.record()
+            pauseButton.hidden = false
+            pauseButton.enabled = true
+        }
+    }
+    
+    @IBAction func pauseRecording(sender: UIButton) {
+        audioRecorder.pause()
+        recordButton.enabled = true
+        stopButton.hidden = false
+        pauseButton.enabled = false
+        isInTheMiddleOfRecording = true
+        recordLabel.text = "Tap to resume"
+    }
+    @IBAction func stopAudio(sender: UIButton) {
+        audioRecorder.stop() // stop recording
+        deactivateAudioSession() // close the audio session
+        stopButton.enabled = false // disable stop button
+        pauseButton.hidden = true
+        recordButton.enabled = true // enable record button
+        recordLabel.text = "Tap to record"
+        isInTheMiddleOfRecording = false
     }
     
     func activateAudioSession() {
@@ -93,14 +125,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             var data = sender as RecordedAudio
             playSoundsViewController.receiveRecordedAudio = data
         }
-    }
-    
-    @IBAction func stopAudio(sender: UIButton) {
-        audioRecorder.stop() // stop recording
-        deactivateAudioSession() // close the audio session
-        stopButton.enabled = false // disable stop button
-        recordButton.enabled = true // enable record button
-        recordLabel.text = "Tap to record"
     }
 
 } // end of RecordSoundsViewController
