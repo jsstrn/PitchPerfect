@@ -72,9 +72,11 @@
                                 <exclude reference="caf-Eb-Tmi"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="lSN-8u-CJ1"/>
                                 <exclude reference="eQG-Ng-dWh"/>
                                 <exclude reference="vdq-dz-ix6"/>
+                                <exclude reference="lSN-8u-CJ1"/>
+                                <exclude reference="EpD-Yh-VGM"/>
+                                <exclude reference="FjG-Qs-2FN"/>
                                 <exclude reference="6Ri-4l-OmG"/>
                                 <exclude reference="HRd-4l-qXV"/>
                                 <exclude reference="KT8-ZD-Aht"/>
@@ -82,8 +84,6 @@
                                 <exclude reference="Htg-Qm-FtR"/>
                                 <exclude reference="uf8-9n-HwL"/>
                                 <exclude reference="vgT-6Q-MVB"/>
-                                <exclude reference="EpD-Yh-VGM"/>
-                                <exclude reference="FjG-Qs-2FN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -94,9 +94,11 @@
                                 <include reference="caf-Eb-Tmi"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="lSN-8u-CJ1"/>
                                 <include reference="eQG-Ng-dWh"/>
                                 <exclude reference="vdq-dz-ix6"/>
+                                <include reference="lSN-8u-CJ1"/>
+                                <exclude reference="EpD-Yh-VGM"/>
+                                <include reference="FjG-Qs-2FN"/>
                                 <include reference="6Ri-4l-OmG"/>
                                 <include reference="HRd-4l-qXV"/>
                                 <include reference="KT8-ZD-Aht"/>
@@ -104,8 +106,6 @@
                                 <exclude reference="Htg-Qm-FtR"/>
                                 <include reference="uf8-9n-HwL"/>
                                 <exclude reference="vgT-6Q-MVB"/>
-                                <exclude reference="EpD-Yh-VGM"/>
-                                <include reference="FjG-Qs-2FN"/>
                             </mask>
                         </variation>
                     </view>
@@ -167,7 +167,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="playSoundsChipmunk:" destination="8H5-RL-Pnd" eventType="touchUpInside" id="nni-YS-UsW"/>
+                                    <action selector="playSoundChipmunk:" destination="8H5-RL-Pnd" eventType="touchUpInside" id="ki0-fm-omQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ty-Hl-oan">

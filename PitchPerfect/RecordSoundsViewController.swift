@@ -11,7 +11,7 @@ import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
-    /* Properties */
+    // Properties
     
     @IBOutlet weak var tapToRecord: UILabel!
     @IBOutlet weak var recordingInProgress: UILabel!
@@ -21,7 +21,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     var audioRecorder: AVAudioRecorder!
     var recordedAudio: RecordedAudio!
     
-    /* Methods */
+    // Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,13 +60,20 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
         println(filePath)
         
-        // open an audio session and set its category
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+        activateAudioSession() // start audio session for recording
         
         audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
         audioRecorder.delegate = self
         audioRecorder.meteringEnabled = true
         audioRecorder.record()
+    }
+    
+    func activateAudioSession() {
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord, error: nil)
+    }
+    
+    func deactivateAudioSession() {
+        AVAudioSession.sharedInstance().setActive(false, error: nil) // close the audio session
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
@@ -92,7 +99,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func stopAudio(sender: UIButton) {
         audioRecorder.stop() // stop recording
-        AVAudioSession.sharedInstance().setActive(false, error: nil) // close the audio session
+        deactivateAudioSession() // close the audio session
         stopButton.enabled = false // disable stop button
         recordButton.enabled = true // enable record button
         recordingInProgress.hidden = true // hide recording label

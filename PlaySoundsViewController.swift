@@ -11,7 +11,6 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
     
-    var audioPlayer: AVAudioPlayer!
     var audioEngine: AVAudioEngine!
     var audioPlayerNode: AVAudioPlayerNode!
     var audioFile: AVAudioFile!
@@ -19,10 +18,6 @@ class PlaySoundsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // create an instance of AVAudioPlayer
-        audioPlayer = AVAudioPlayer(contentsOfURL: receiveRecordedAudio.filePathURL, error: nil)
-        audioPlayer.enableRate = true // enable rate
         
         audioEngine = AVAudioEngine()
         audioFile = AVAudioFile(forReading: receiveRecordedAudio.filePathURL, error: nil)
@@ -32,59 +27,57 @@ class PlaySoundsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func playSound() {
-        audioPlayer.stop() // stop audio clip
-        audioPlayer.currentTime = 0.0 // reset play head
-        audioPlayer.play() // play audio clip
-    }
 
     @IBAction func playSoundSlow(sender: UIButton) {
-        audioPlayer.rate = 0.5 // change rate of audio clip
-        stopAndResetAudioEngine()
-        playSound()
+        playSound(playSoundWithVariableRate(0.5))
     }
 
     @IBAction func playSoundFast(sender: UIButton) {
-        audioPlayer.rate = 1.5 // change rate of audio clip
-        stopAndResetAudioEngine()
-        playSound()
-    }
-    
-    func stopAndResetAudioEngine() {
-        audioEngine.stop()
-        audioEngine.reset()
+        playSound(playSoundWithVariableRate(1.5))
     }
     
     @IBAction func stopSound(sender: UIButton) {
-        audioPlayer.stop() // stop audio clip
         stopAndResetAudioEngine()
     }
+
+    @IBAction func playSoundChipmunk(sender: UIButton) {
+        playSound(playSoundWithVariablePitch(1000))
+    }
     
-    func playSoundsWithVariablePitch(pitch: Float) {
-        audioPlayer.stop()
+    @IBAction func playSoundDarthVader(sender: UIButton) {
+        playSound(playSoundWithVariablePitch(-1000))
+    }
+    
+    func playSound(changeSoundEffect: AVAudioUnitTimePitch) {
         stopAndResetAudioEngine()
         
         audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
         
-        var changePitchEffect = AVAudioUnitTimePitch()
-        changePitchEffect.pitch = pitch
-        audioEngine.attachNode(changePitchEffect)
+        audioEngine.attachNode(changeSoundEffect)
         
-        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
-        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        audioEngine.connect(audioPlayerNode, to: changeSoundEffect, format: nil)
+        audioEngine.connect(changeSoundEffect, to: audioEngine.outputNode, format: nil)
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
         audioEngine.startAndReturnError(nil)
         audioPlayerNode.play()
     }
-
-    @IBAction func playSoundsChipmunk(sender: UIButton) {
-        playSoundsWithVariablePitch(1000)
+    
+    func playSoundWithVariableRate(rate: Float) -> AVAudioUnitTimePitch {
+        var changeRateEffect = AVAudioUnitTimePitch()
+        changeRateEffect.rate = rate
+        return changeRateEffect
     }
     
-    @IBAction func playSoundDarthVader(sender: UIButton) {
-        playSoundsWithVariablePitch(-1000)
+    func playSoundWithVariablePitch(pitch: Float) -> AVAudioUnitTimePitch {
+        var changePitchEffect = AVAudioUnitTimePitch()
+        changePitchEffect.pitch = pitch
+        return changePitchEffect
+    }
+    
+    func stopAndResetAudioEngine() {
+        audioEngine.stop()
+        audioEngine.reset()
     }
 }
