@@ -42,12 +42,6 @@
                                     <action selector="stopAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QXu-cd-c4U"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Record" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caf-Eb-Tmi">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.30980392156862746" green="0.76470588235294112" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.22352941176470589" green="0.25882352941176473" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -56,10 +50,8 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vE0-zt-NDY" secondAttribute="bottom" constant="50" id="FjG-Qs-2FN"/>
                             <constraint firstAttribute="centerX" secondItem="Eqp-t1-qXI" secondAttribute="centerX" id="HRd-4l-qXV"/>
                             <constraint firstAttribute="centerX" secondItem="vE0-zt-NDY" secondAttribute="centerX" id="Htg-Qm-FtR"/>
-                            <constraint firstItem="Eqp-t1-qXI" firstAttribute="top" secondItem="caf-Eb-Tmi" secondAttribute="bottom" constant="14" id="KT8-ZD-Aht"/>
                             <constraint firstAttribute="centerX" secondItem="LtR-aE-wZS" secondAttribute="centerX" id="eQG-Ng-dWh"/>
                             <constraint firstItem="Eqp-t1-qXI" firstAttribute="top" secondItem="LtR-aE-wZS" secondAttribute="bottom" constant="14" id="iFS-3y-Bzm"/>
-                            <constraint firstAttribute="centerX" secondItem="caf-Eb-Tmi" secondAttribute="centerX" id="lSN-8u-CJ1"/>
                             <constraint firstAttribute="centerX" secondItem="vE0-zt-NDY" secondAttribute="centerX" id="uf8-9n-HwL"/>
                             <constraint firstAttribute="centerY" secondItem="LtR-aE-wZS" secondAttribute="centerY" constant="50.5" id="vdq-dz-ix6"/>
                             <constraint firstAttribute="centerY" secondItem="vE0-zt-NDY" secondAttribute="centerY" id="vgT-6Q-MVB"/>
@@ -69,17 +61,14 @@
                                 <exclude reference="Eqp-t1-qXI"/>
                                 <exclude reference="LtR-aE-wZS"/>
                                 <exclude reference="vE0-zt-NDY"/>
-                                <exclude reference="caf-Eb-Tmi"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="eQG-Ng-dWh"/>
                                 <exclude reference="vdq-dz-ix6"/>
-                                <exclude reference="lSN-8u-CJ1"/>
                                 <exclude reference="EpD-Yh-VGM"/>
                                 <exclude reference="FjG-Qs-2FN"/>
                                 <exclude reference="6Ri-4l-OmG"/>
                                 <exclude reference="HRd-4l-qXV"/>
-                                <exclude reference="KT8-ZD-Aht"/>
                                 <exclude reference="iFS-3y-Bzm"/>
                                 <exclude reference="Htg-Qm-FtR"/>
                                 <exclude reference="uf8-9n-HwL"/>
@@ -91,17 +80,14 @@
                                 <include reference="Eqp-t1-qXI"/>
                                 <include reference="LtR-aE-wZS"/>
                                 <include reference="vE0-zt-NDY"/>
-                                <include reference="caf-Eb-Tmi"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="eQG-Ng-dWh"/>
                                 <exclude reference="vdq-dz-ix6"/>
-                                <include reference="lSN-8u-CJ1"/>
                                 <exclude reference="EpD-Yh-VGM"/>
                                 <include reference="FjG-Qs-2FN"/>
                                 <include reference="6Ri-4l-OmG"/>
                                 <include reference="HRd-4l-qXV"/>
-                                <include reference="KT8-ZD-Aht"/>
                                 <include reference="iFS-3y-Bzm"/>
                                 <exclude reference="Htg-Qm-FtR"/>
                                 <include reference="uf8-9n-HwL"/>
@@ -112,9 +98,8 @@
                     <navigationItem key="navigationItem" title="Record" id="bkV-hc-rBU"/>
                     <connections>
                         <outlet property="recordButton" destination="Eqp-t1-qXI" id="8Ax-ey-5Hn"/>
-                        <outlet property="recordingInProgress" destination="LtR-aE-wZS" id="Xcr-h6-qOW"/>
+                        <outlet property="recordLabel" destination="LtR-aE-wZS" id="yRx-HB-Xan"/>
                         <outlet property="stopButton" destination="vE0-zt-NDY" id="qO7-Y0-gSI"/>
-                        <outlet property="tapToRecord" destination="caf-Eb-Tmi" id="aRD-n6-bwK"/>
                         <segue destination="8H5-RL-Pnd" kind="show" identifier="stopRecording" id="K0e-PG-RcR"/>
                     </connections>
                 </viewController>

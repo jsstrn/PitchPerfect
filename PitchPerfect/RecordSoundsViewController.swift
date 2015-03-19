@@ -13,8 +13,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     // Properties
     
-    @IBOutlet weak var tapToRecord: UILabel!
-    @IBOutlet weak var recordingInProgress: UILabel!
+    @IBOutlet weak var recordLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
@@ -34,15 +33,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        recordLabel.text = "Tap to record"
         recordButton.enabled = true // enable record button
         stopButton.hidden = true // show stop button
         stopButton.enabled = true // enable stop button
-        recordingInProgress.hidden = true // hide recording label
     }
 
     @IBAction func recordAudio(sender: UIButton) {
-        tapToRecord.hidden = true // hide instructions
-        recordingInProgress.hidden = false // show recording label
+        recordLabel.text = "Recording"
         stopButton.hidden = false // show stop button
         recordButton.enabled = false // disable record button
         
@@ -85,7 +83,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         } else {
             println("Recording was not successful!")
             recordButton.enabled = true // enable record button
-            recordingInProgress.hidden = true // hide recording label
+            recordLabel.text = "Tap to record"
         }
     }
     
@@ -102,8 +100,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         deactivateAudioSession() // close the audio session
         stopButton.enabled = false // disable stop button
         recordButton.enabled = true // enable record button
-        recordingInProgress.hidden = true // hide recording label
-        tapToRecord.hidden = false // show instructions
+        recordLabel.text = "Tap to record"
     }
 
 } // end of RecordSoundsViewController
