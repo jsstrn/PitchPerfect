@@ -48,7 +48,11 @@ class PlaySoundsViewController: UIViewController {
         playSound(playSoundWithVariablePitch(-1000))
     }
     
-    func playSound(changeSoundEffect: AVAudioUnitTimePitch) {
+    @IBAction func playSoundReverb(sender: UIButton) {
+        playSound(playSoundWithVariableReverb(100))
+    }
+    
+    func playSound(changeSoundEffect: AVAudioUnit) {
         stopAndResetAudioEngine()
         
         audioPlayerNode = AVAudioPlayerNode()
@@ -74,6 +78,12 @@ class PlaySoundsViewController: UIViewController {
         var changePitchEffect = AVAudioUnitTimePitch()
         changePitchEffect.pitch = pitch
         return changePitchEffect
+    }
+    
+    func playSoundWithVariableReverb(wetDryMix: Float) -> AVAudioUnitReverb {
+        var changeOverlapEffect = AVAudioUnitReverb()
+        changeOverlapEffect.wetDryMix = wetDryMix
+        return changeOverlapEffect
     }
     
     func stopAndResetAudioEngine() {
