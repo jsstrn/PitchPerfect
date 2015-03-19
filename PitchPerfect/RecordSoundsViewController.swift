@@ -43,7 +43,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.enabled = true // enable stop button
     }
 
-    @IBAction func recordAudio(sender: UIButton) {
+    @IBAction func startRecording(sender: UIButton) {
         recordLabel.text = "Recording"
         stopButton.hidden = false // show stop button
         pauseButton.hidden = false
@@ -88,7 +88,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         isInTheMiddleOfRecording = true
         recordLabel.text = "Tap to resume"
     }
-    @IBAction func stopAudio(sender: UIButton) {
+    
+    @IBAction func stopRecording(sender: UIButton) {
         audioRecorder.stop() // stop recording
         deactivateAudioSession() // close the audio session
         stopButton.enabled = false // disable stop button
