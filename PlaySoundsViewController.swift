@@ -65,6 +65,7 @@ class PlaySoundsViewController: UIViewController {
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
         audioEngine.startAndReturnError(nil)
+        activateAudioSession()
         audioPlayerNode.play()
     }
     
@@ -89,5 +90,14 @@ class PlaySoundsViewController: UIViewController {
     func stopAndResetAudioEngine() {
         audioEngine.stop()
         audioEngine.reset()
+        deactivateAudioSession()
+    }
+    
+    func activateAudioSession() {
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
+    }
+    
+    func deactivateAudioSession() {
+        AVAudioSession.sharedInstance().setActive(false, error: nil) // close the audio session
     }
 }

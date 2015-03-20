@@ -20,7 +20,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     var audioRecorder: AVAudioRecorder!
     var recordedAudio: RecordedAudio!
-    var isInTheMiddleOfRecording: Bool = false
+    var userHasPausedRecording: Bool = false
+    var recordingStatus : Int = 1
+    // recordingStatus
+    // 1 - user is starting a new recording
+    // 2 - user is in the middle of recording
+    // 3 - user has paused recording
     
     // Methods
     
@@ -35,23 +40,51 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        recordLabel.text = "Tap to record"
-        recordButton.enabled = true // enable record button
-        pauseButton.hidden = true
-        pauseButton.enabled = true
-        stopButton.hidden = true // show stop button
-        stopButton.enabled = true // enable stop button
+        recordingStatus = 1
+        displayManager()
+    }
+    
+    func displayManager() {
+        switch recordingStatus {
+        // user is starting a new recording
+        case 1:
+            recordLabel.text = "Tap to record"
+            recordButton.enabled = true
+            pauseButton.enabled = true
+            stopButton.enabled = true
+            pauseButton.hidden = true
+            stopButton.hidden = true
+            
+        // user is in the middle of recording
+        case 2:
+            recordLabel.text = "Recording"
+            recordButton.enabled = false
+            pauseButton.enabled = true
+            stopButton.enabled = true
+            pauseButton.hidden = false
+            stopButton.hidden = false
+            
+        // user has paused recording
+        case 3:
+            recordLabel.text = "Tap to resume"
+            recordButton.enabled = true
+            pauseButton.enabled = false
+            stopButton.enabled = true
+            pauseButton.hidden = false
+            stopButton.hidden = false
+        default:
+            break
+        }
     }
 
     @IBAction func startRecording(sender: UIButton) {
-        recordLabel.text = "Recording"
-        stopButton.hidden = false // show stop button
-        pauseButton.hidden = false
-        recordButton.enabled = false // disable record button
+        recordingStatus = 2
+        displayManager()
         
-        if !isInTheMiddleOfRecording {
-            // create a new recording
-            
+        if userHasPausedRecording {
+            // continue with current recording
+            audioRecorder.record()
+        } else {
             // get the main app directory
             let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
             
@@ -66,37 +99,26 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             let filePath = NSURL.fileURLWithPathComponents(pathArray)
             println(filePath)
             
-            activateAudioSession() // start audio session for recording
-            
+            // start a new recording
+            activateAudioSession()
             audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
             audioRecorder.delegate = self
             audioRecorder.meteringEnabled = true
             audioRecorder.record()
-        } else {
-            // continue recording
-            audioRecorder.record()
-            pauseButton.hidden = false
-            pauseButton.enabled = true
         }
     }
     
     @IBAction func pauseRecording(sender: UIButton) {
         audioRecorder.pause()
-        recordButton.enabled = true
-        stopButton.hidden = false
-        pauseButton.enabled = false
-        isInTheMiddleOfRecording = true
-        recordLabel.text = "Tap to resume"
+        userHasPausedRecording = true
+        recordingStatus = 3
+        displayManager()
     }
     
     @IBAction func stopRecording(sender: UIButton) {
-        audioRecorder.stop() // stop recording
-        deactivateAudioSession() // close the audio session
-        stopButton.enabled = false // disable stop button
-        pauseButton.hidden = true
-        recordButton.enabled = true // enable record button
-        recordLabel.text = "Tap to record"
-        isInTheMiddleOfRecording = false
+        audioRecorder.stop()
+        deactivateAudioSession()
+        userHasPausedRecording = false
     }
     
     func activateAudioSession() {
