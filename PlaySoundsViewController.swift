@@ -82,9 +82,9 @@ class PlaySoundsViewController: UIViewController {
     }
     
     func playSoundWithVariableReverb(wetDryMix: Float) -> AVAudioUnitReverb {
-        var changeOverlapEffect = AVAudioUnitReverb()
-        changeOverlapEffect.wetDryMix = wetDryMix
-        return changeOverlapEffect
+        var changeReverbEffect = AVAudioUnitReverb()
+        changeReverbEffect.wetDryMix = wetDryMix
+        return changeReverbEffect
     }
     
     func stopAndResetAudioEngine() {
