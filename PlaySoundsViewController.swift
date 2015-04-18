@@ -29,11 +29,11 @@ class PlaySoundsViewController: UIViewController {
     }
 
     @IBAction func playSoundSlow(sender: UIButton) {
-        playSound(playSoundWithVariableRate(0.5))
+        playSound(withVariableRate(0.5))
     }
 
     @IBAction func playSoundFast(sender: UIButton) {
-        playSound(playSoundWithVariableRate(1.5))
+        playSound(withVariableRate(1.5))
     }
     
     @IBAction func stopSound(sender: UIButton) {
@@ -41,15 +41,15 @@ class PlaySoundsViewController: UIViewController {
     }
 
     @IBAction func playSoundChipmunk(sender: UIButton) {
-        playSound(playSoundWithVariablePitch(1000))
+        playSound(withVariablePitch(1000))
     }
     
     @IBAction func playSoundDarthVader(sender: UIButton) {
-        playSound(playSoundWithVariablePitch(-1000))
+        playSound(withVariablePitch(-1000))
     }
     
     @IBAction func playSoundReverb(sender: UIButton) {
-        playSound(playSoundWithVariableReverb(100))
+        playSound(withVariableReverb(100))
     }
     
     func playSound(changeSoundEffect: AVAudioUnit) {
@@ -69,19 +69,19 @@ class PlaySoundsViewController: UIViewController {
         audioPlayerNode.play()
     }
     
-    func playSoundWithVariableRate(rate: Float) -> AVAudioUnitTimePitch {
+    func withVariableRate(rate: Float) -> AVAudioUnitTimePitch {
         var changeRateEffect = AVAudioUnitTimePitch()
         changeRateEffect.rate = rate
         return changeRateEffect
     }
     
-    func playSoundWithVariablePitch(pitch: Float) -> AVAudioUnitTimePitch {
+    func withVariablePitch(pitch: Float) -> AVAudioUnitTimePitch {
         var changePitchEffect = AVAudioUnitTimePitch()
         changePitchEffect.pitch = pitch
         return changePitchEffect
     }
     
-    func playSoundWithVariableReverb(wetDryMix: Float) -> AVAudioUnitReverb {
+    func withVariableReverb(wetDryMix: Float) -> AVAudioUnitReverb {
         var changeReverbEffect = AVAudioUnitReverb()
         changeReverbEffect.wetDryMix = wetDryMix
         return changeReverbEffect
@@ -98,6 +98,6 @@ class PlaySoundsViewController: UIViewController {
     }
     
     func deactivateAudioSession() {
-        AVAudioSession.sharedInstance().setActive(false, error: nil) // close the audio session
+        AVAudioSession.sharedInstance().setActive(false, error: nil)
     }
 }

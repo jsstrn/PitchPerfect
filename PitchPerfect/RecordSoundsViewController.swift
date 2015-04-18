@@ -86,7 +86,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             audioRecorder.record()
         } else {
             // get the main app directory
-            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
             
             // create the audio file name with datetime stamp
             let currentDateTime = NSDate()
@@ -137,15 +137,15 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         } else {
             println("Recording was not successful!")
-            recordButton.enabled = true // enable record button
-            recordLabel.text = "Tap to record"
+            recordingStatus = 1
+            displayManager()
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "stopRecording") {
-            let playSoundsViewController: PlaySoundsViewController = segue.destinationViewController as PlaySoundsViewController
-            var data = sender as RecordedAudio
+            let playSoundsViewController: PlaySoundsViewController = segue.destinationViewController as! PlaySoundsViewController
+            var data = sender as! RecordedAudio
             playSoundsViewController.receiveRecordedAudio = data
         }
     }
